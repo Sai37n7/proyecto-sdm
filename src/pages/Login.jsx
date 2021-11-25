@@ -15,6 +15,15 @@ export const Login = ({history}) => {
     history = useHistory();
 
     async function myFun(){
+        Swal.fire({
+            title: 'Verificando datos',
+            text: 'Espere por favor',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+        });
         await fetch('https://sdib.com.mx/portafolio/sorcia/public/api/auth/login',{
             method: 'POST',
             headers:{
@@ -27,12 +36,14 @@ export const Login = ({history}) => {
             })
         }).then(res => res.json()).then(resData =>{
             if(resData.response_flag !== 1){
+                Swal.close();
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'El correo o la contraseña son incorrectos',
                 })
             }else{
+                Swal.close();
                 localStorage.setItem("token", resData.response.token)
                 dispatch({type: AuthTypes.login});
                 history.push("/inventario")

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { AuthTypes } from '../types/AuthTypes';
+import Swal from 'sweetalert2'
 
 const Navbar = () => {
 
@@ -13,12 +14,17 @@ const Navbar = () => {
     const { dispatch } = useContext(AuthContext);
 
     const handleLogout = () =>{
-        //Usamos el dispathc para modificar el context y establecerlo en false.
-        dispatch({type: AuthTypes.logout});
-        localStorage.clear();
-
-        //console.log(history);
-        history.replace("/login");
+        Swal.fire({
+            title: '¿Esta seguro que desea salir del sistema?',
+            showCancelButton: true,
+            confirmButtonText: 'Salir',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch({type: AuthTypes.logout});
+                localStorage.clear();
+                history.replace("/login");
+            }
+        })
     }
 
     return (
@@ -33,7 +39,7 @@ const Navbar = () => {
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="pedidos">Pedidos</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="inventario">Inventario</NavLink></li>
-                            <li className="nav-item"><a href="/#"  onClick={handleLogout} className="nav-link">Cerrar sesión</a></li>
+                            <li className="nav-item"><a href={handleLogout}  onClick={handleLogout} className="nav-link">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
