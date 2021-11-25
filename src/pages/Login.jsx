@@ -45,7 +45,7 @@ export const Login = ({history}) => {
             <div className="wrapper fadeInDown">
                 <div id="formContent">
                     <div className="fadeIn first">
-                        <img className="img-rounded uwu" src="img/logo.png" id="icon" alt="User Icon" />
+                        <img className="img-rounded uwu mt-4" src="img/logo.png" id="icon" alt="User Icon" />
                     </div>
                         <input type="email"
                         onChange={(e)=>setEmail(e.target.value)}

@@ -8,10 +8,12 @@ export const AppRouter = () => {
     return (
         <>
             <Navbar/>
-            <Switch>
-                <Route exact path="/inventario" component={Inventario} />
-                <Route exact path="/pedidos" component={Pedidos} />
-            </Switch>
+            <div className="container mt-4">
+                <Switch>
+                    <Route exact path="/inventario" component={Inventario} />
+                    <Route exact path="/pedidos" component={Pedidos} />
+                </Switch>
+            </div>
         </>
     )
 }

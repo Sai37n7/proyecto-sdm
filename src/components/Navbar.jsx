@@ -23,25 +23,21 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className="navbar navbar-default navbar-fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div className="container">
-                <div className="navbar-header">
-                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                        <span className="icon-bar"></span>
-                    </button>
                     <a className="navbar-brand" href="/#"><b>SDM</b></a>
+                    <button className="navbar-toggler m-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="pedidos">Pedidos</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="inventario">Inventario</NavLink></li>
+                            <li className="nav-item"><a href="/#"  onClick={handleLogout} className="nav-link">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="navbar-collapse collapse">
-                    <ul className="nav navbar-nav navbar-right">
-                        <li><NavLink className="smoothscroll" aria-current="page" to="pedidos">Pedidos</NavLink></li>
-                        <li><NavLink className="smoothscroll" aria-current="page" to="inventario">Inventario</NavLink></li>
-                        <li><a href="/#"  onClick={handleLogout} className="smoothscroll">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
+            </nav>
         </div>
     )
 }
