@@ -24,7 +24,7 @@ export const Login = ({history}) => {
                     Swal.showLoading()
                 },
         });
-        await fetch('https://sdib.com.mx/portafolio/sorcia/public/api/auth/login',{
+        await fetch('http://127.0.0.1:8000/api/auth/login',{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
