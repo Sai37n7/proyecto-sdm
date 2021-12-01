@@ -4,7 +4,7 @@ const ModalPedido = ({id, folio, fechaCreacion, estatus, observaciones, detalle}
   return (
     <div>
       {/* Button trigger modal */}
-      <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#exampleModal"+id}>
+      <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target={"#exampleModal"+id}>
       <i class="fas fa-eye"></i> Ver detalle
       </button>
 

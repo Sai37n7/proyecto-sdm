@@ -6,7 +6,17 @@ const Tabla = (data) => {
   const color = (estatus) => {
     switch (estatus) {
       case 'SOLICITADO':
+        return 'bg-primary';
+      case 'REVISADO':
+        return 'bg-info';
+      case 'APROBADO':
         return 'bg-success';
+      case 'CANCELADO':
+        return 'bg-danger';
+      case 'SURTIDO':
+        return 'bg-info';
+      case 'SURTIDO PARCIAL':
+        return 'bg-warning';
       default:
         break;
     }
@@ -27,7 +37,7 @@ const Tabla = (data) => {
           {
             data.response.map( (p) => {
               return(
-              <tr key={p.id}>
+              <tr key={p.id+Date.now()}>
                 <td scope="row">{p.folio}</td>
                 <td>{p.fechaCreacion.split('.')[0]}</td>
                 <td><span className={"rounded-3 text-white px-2 "+color(p.estatus)}>{p.estatus}</span></td>

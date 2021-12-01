@@ -36,7 +36,7 @@ const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="pedidos">Pedidos</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" aria-current="page" to="inventario">Inventario</NavLink></li>
                             <li className="nav-item"><a onClick={handleLogout} style={{cursor : 'pointer'}} className="nav-link">Cerrar sesión</a></li>
