@@ -56,10 +56,18 @@ const ModalAgregarPedido = ({history}) => {
             })
             if(!existe){
                 //console.log(text, value);
-                setProducto({
-                    nombre: text1+' '+text,
-                    id: value
-                });
+                if(cantidad >= 1){
+                    setProducto({
+                        nombre: text1+' '+text,
+                        id: value
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'La cantidad no puede ser menor a 1',
+                    });
+                }
                 //console.log(producto); 
             }else{
                 Swal.fire({
@@ -238,9 +246,12 @@ const ModalAgregarPedido = ({history}) => {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Cantidad:</label>
-                                <input type="number" min="1" className="form-control" aria-label="Sizing example input" value={cantidad} onChange={handleChangeCantidad} onKeyPress={(event) => {
+                                <input id="cantidad_pedido" type="number" min="1" max="999999" className="form-control" aria-label="Sizing example input" defaultValue="1" onChange={handleChangeCantidad} onKeyPress={(event) => {
                                     if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
+                                        event.preventDefault();
+                                    }
+                                    if(event.target.value.length > 5){
+                                        event.preventDefault();
                                     }
                                 }}/>
                             </div>
@@ -277,7 +288,7 @@ const ModalAgregarPedido = ({history}) => {
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Observaciones:</label>
-                                <textarea style={{resize: 'none'}} className="form-control" rows="3" onChange={handleChangeObservaciones} value={observaciones}></textarea>
+                                <textarea style={{resize: 'none'}} className="form-control" rows="3" onChange={handleChangeObservaciones} value={observaciones} maxlength="80"></textarea>
                             </div>
                         </div>
                     </div>
