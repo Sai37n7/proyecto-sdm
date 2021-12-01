@@ -44,7 +44,7 @@ const ModalPedido = ({id, folio, fechaCreacion, estatus, observaciones, detalle}
                         {/* <th scope="col">Empaque</th> */}
                         <th scope="col">Cant. Pedida</th>
                         <th scope="col">Cant. Surtida</th>
-                        <th scope="col">Cant. Entregada</th>
+                        {/* <th scope="col">Cant. Entregada</th> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -52,11 +52,11 @@ const ModalPedido = ({id, folio, fechaCreacion, estatus, observaciones, detalle}
                         detalle.map( (p) => {
                           return(
                           <tr key={p.id}>
-                            <td scope="row">{p.producto}</td>
+                            <td scope="row">{p.producto+ ' | '+p.empaque}</td>
                             {/* <td>{p.empaque}</td> */}
                             <td>{p.cantidad}</td>
                             <td>{p.cantidadSurtida}</td>
-                            <td>{p.cantidadRecepcionada}</td>
+                            {/* <td>{p.cantidadRecepcionada}</td> */}
                           </tr>)
                         })
                       }
