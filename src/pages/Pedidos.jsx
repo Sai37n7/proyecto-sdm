@@ -9,7 +9,7 @@ const Pedidos = () => {
 
   const base = axios.create({
     baseURL:
-      "http://127.0.0.1:8000",
+      "https://sdib.com.mx/portafolio/sdm_backend/public/",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

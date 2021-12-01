@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 
 const ModalAgregarPedido = ({history}) => {
     const [productos, setProductos] = useState([]);
-    const [solicitados, setSolicitados] = useState([])
+    const [solicitados, setSolicitados] = useState([]);
+    const [empaques, setEmpaques] = useState([])
     const [producto, setProducto] = useState({});
     const [cantidad, setCantidad] = useState(1);
     const [select, setSelect] = useState(0);
@@ -14,7 +15,13 @@ const ModalAgregarPedido = ({history}) => {
     history = useHistory();
 
     const handleChange = (e) => {
-        setSelect(e.target.value);
+        setSelect(Number(e.target.value));
+        console.log(Number(e.target.value));
+        //mostrarLoading();
+        let empaques = (productos.find( p => p.id === Number(e.target.value))?.empaques) || [];
+        //console.log(empaques);
+        setEmpaques(empaques);
+        //Swal.close();
     }
 
     const handleChangeObservaciones = (e) => {
@@ -34,7 +41,9 @@ const ModalAgregarPedido = ({history}) => {
     };
     
     const agregarProducto = () => {
-        let sel = document.getElementById("productos_pedido");
+        let sel1 = document.getElementById("productos_pedido");
+        let text1= sel1.options[sel1.selectedIndex].text;
+        let sel = document.getElementById("empaque");
         let text= sel.options[sel.selectedIndex].text;
         let value = Number(sel.options[sel.selectedIndex].value);
         if(value !== 0){
@@ -42,12 +51,13 @@ const ModalAgregarPedido = ({history}) => {
             solicitados.forEach( d => {
                 if(d.producto_empaque_id === value){
                     existe = true;
+                    return;
                 }
             })
             if(!existe){
                 //console.log(text, value);
                 setProducto({
-                    nombre: text,
+                    nombre: text1+' '+text,
                     id: value
                 });
                 //console.log(producto); 
@@ -62,7 +72,7 @@ const ModalAgregarPedido = ({history}) => {
             Swal.fire({
                 icon: 'warning',
                 title: 'Advertencia',
-                text: 'Por favor, seleccione un producto valido.',
+                text: 'Por favor, seleccione un empaque y producto valido.',
             });
         }
     }
@@ -78,7 +88,7 @@ const ModalAgregarPedido = ({history}) => {
 
     const base = axios.create({
         baseURL:
-          "http://127.0.0.1:8000",
+          "https://sdib.com.mx/portafolio/sdm_backend/public/",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -157,6 +167,7 @@ const ModalAgregarPedido = ({history}) => {
         setSolicitados([]);
         setObservaciones("");
         setProducto({});
+        setEmpaques([]);
         mostrarLoading();
         try {
             const { data } = await base.post('/api/productos/mostrarProductos');
@@ -169,7 +180,9 @@ const ModalAgregarPedido = ({history}) => {
                 });
             } else {
                 setProductos(data.response);
-                setSelect(data.response[0].id)
+                // setSelect(data.response[0].id)
+                // let empaques = productos.find( p => p.id === select);
+                // setEmpaques(empaques);
                 console.log(data);
             }
         } catch (error) {
@@ -207,7 +220,18 @@ const ModalAgregarPedido = ({history}) => {
                                     <option value={0}>Seleccione una opcion</option>
                                     {
                                         productos.map( (p) => {
-                                            return(<option key={p.id+Date.now()} value={Number(p.id)} selected>{p.descripcion}</option>);
+                                            return(<option key={p.id+Date.now()} value={Number(p.id)}>{p.descripcion}</option>);
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <label className="form-label" for="empaque">Empaque:</label>
+                                <select className="form-select" aria-label="Default select example" id="empaque" defaultValue={0}>
+                                    <option value={0}>Seleccione una opcion</option>
+                                    {
+                                        empaques.map( (p) => {
+                                            return(<option key={p.producto_empaque_id+Date.now()} value={Number(p.producto_empaque_id)}>{p.empaque_descripcion + ' '+ p.codigo_barras}</option>);
                                         })
                                     }
                                 </select>

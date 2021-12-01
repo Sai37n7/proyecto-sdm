@@ -6,15 +6,13 @@ const Tabla = (data) => {
   const color = (estatus) => {
     switch (estatus) {
       case 'SOLICITADO':
-        return 'bg-primary';
-      case 'REVISADO':
         return 'bg-info';
-      case 'APROBADO':
-        return 'bg-success';
+      case 'PENDIENTE POR SURTIR':
+        return 'bg-dark';
       case 'CANCELADO':
         return 'bg-danger';
       case 'SURTIDO':
-        return 'bg-info';
+        return 'bg-primary';
       case 'SURTIDO PARCIAL':
         return 'bg-warning';
       default:

@@ -24,7 +24,7 @@ export const Login = ({history}) => {
                     Swal.showLoading()
                 },
         });
-        await fetch('http://127.0.0.1:8000/api/auth/login',{
+        await fetch('https://sdib.com.mx/portafolio/sdm_backend/public/api/auth/login',{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
@@ -44,7 +44,8 @@ export const Login = ({history}) => {
                 })
             }else{
                 Swal.close();
-                localStorage.setItem("token", resData.response.token)
+                localStorage.setItem("token", resData.response.token);
+                localStorage.setItem("sucursal", resData.response.sucursal);
                 dispatch({type: AuthTypes.login});
                 history.push("/inventario")
             }
