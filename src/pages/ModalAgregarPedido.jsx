@@ -6,7 +6,7 @@ const ModalAgregarPedido = () => {
     const [productos, setProductos] = useState([]);
     const [solicitados, setSolicitados] = useState([])
     const [producto, setProducto] = useState({});
-    const [cantidad, setCantidad] = useState(0);
+    const [cantidad, setCantidad] = useState(1);
     const [select, setSelect] = useState(0);
 
     const handleChange = (e) => {
@@ -14,7 +14,7 @@ const ModalAgregarPedido = () => {
     }
 
     const handleChangeCantidad = (e) => {
-        setCantidad(e.target.value);
+        setCantidad(Number(e.target.value));
     }
     
     const agregarProducto = () => {
@@ -38,11 +38,11 @@ const ModalAgregarPedido = () => {
         console.log(solicitados);
     }, [producto])
 
-    useEffect( () => {
-        if(!solicitados[0]){
-            setSolicitados([]);
-        }
-    },[solicitados])
+    // useEffect( () => {
+    //     if(!solicitados[0]){
+    //         setSolicitados([]);
+    //     }
+    // },[solicitados])
 
     const base = axios.create({
         baseURL:
@@ -140,13 +140,15 @@ const ModalAgregarPedido = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            solicitados.map( (p) => {
-                                                return(
-                                                <tr key={p.producto_empaque+'p'}>
-                                                    <td scope="row">{p.nombre}</td>
-                                                    {/* <td>{p.empaque}</td> */}
-                                                    <td>{p.cantidad}</td>
-                                                </tr>)
+                                            solicitados.map( (p, i) => {
+                                                if(i !== 0){
+                                                    return(
+                                                        <tr key={p.producto_empaque+'p'}>
+                                                            <td scope="row">{p.nombre}</td>
+                                                            {/* <td>{p.empaque}</td> */}
+                                                            <td>{p.cantidad}</td>
+                                                        </tr>)
+                                                }
                                             })
                                         }
                                     </tbody>
